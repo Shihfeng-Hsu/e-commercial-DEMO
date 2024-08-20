@@ -1,8 +1,4 @@
-import React from "react";
-import Carousel from "@/components/Carousel";
-import ProductCard from "@/components/ProductCard";
-
-const featuredProducts = [
+export const products = [
   {
     id: 1,
     name: "經典純色T恤",
@@ -77,7 +73,7 @@ const featuredProducts = [
   },
 ];
 
-const carouselImages = [
+export const carouselImages = [
   {
     src: "https://picsum.photos/800/600?random=1",
     alt: "T恤新品上市",
@@ -97,33 +93,3 @@ const carouselImages = [
     description: "與知名藝術家合作，限量發售",
   },
 ];
-
-export default function Home() {
-  return (
-    <div className="space-y-8">
-      <section>
-        <Carousel images={carouselImages} />
-      </section>
-
-      <section>
-        <h2 className="text-2xl font-bold mb-4">
-          精選T恤
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {featuredProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              price={product.price}
-              name={product.name}
-              description={product.description}
-              imageUrl={product.image}
-              imagePath={product.image}
-              productID={product.id}
-              product={product}
-            />
-          ))}
-        </div>
-      </section>
-    </div>
-  );
-}

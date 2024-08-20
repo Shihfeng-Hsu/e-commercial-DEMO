@@ -1,8 +1,7 @@
-import React from "react";
-import Carousel from "@/components/Carousel";
-import ProductCard from "@/components/ProductCard";
+"use client";
+import { createContext, useContext } from "react";
 
-const featuredProducts = [
+const products = [
   {
     id: 1,
     name: "經典純色T恤",
@@ -77,53 +76,28 @@ const featuredProducts = [
   },
 ];
 
-const carouselImages = [
-  {
-    src: "https://picsum.photos/800/600?random=1",
-    alt: "T恤新品上市",
-    title: "夏日新品",
-    description: "清涼舒適，盡情展現自我",
-  },
-  {
-    src: "https://picsum.photos/800/600?random=2",
-    alt: "環保系列",
-    title: "綠色時尚",
-    description: "環保面料，時尚與責任並重",
-  },
-  {
-    src: "https://picsum.photos/800/600?random=3",
-    alt: "限量聯名",
-    title: "藝術聯名系列",
-    description: "與知名藝術家合作，限量發售",
-  },
-];
+export const ProductsContext = createContext();
 
-export default function Home() {
+export default function ProductsProvider({
+  children,
+}) {
   return (
-    <div className="space-y-8">
-      <section>
-        <Carousel images={carouselImages} />
-      </section>
-
-      <section>
-        <h2 className="text-2xl font-bold mb-4">
-          精選T恤
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {featuredProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              price={product.price}
-              name={product.name}
-              description={product.description}
-              imageUrl={product.image}
-              imagePath={product.image}
-              productID={product.id}
-              product={product}
-            />
-          ))}
-        </div>
-      </section>
-    </div>
+    <ProductsContext.Provider
+      value={{
+        products,
+      }}
+    >
+      {children}
+    </ProductsContext.Provider>
   );
+}
+
+export function useProduct() {
+  const context = useContext(ProductsContext);
+  if (context === undefined) {
+    throw new Error(
+      "useCart must be used within a CartProvider"
+    );
+  }
+  return context;
 }
