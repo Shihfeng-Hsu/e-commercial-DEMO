@@ -142,6 +142,10 @@ export default function CartProvider({
     );
   };
 
+  const removeCart = () => {
+    setCart([]);
+  };
+
   const updateQuantity = (
     productId,
     size,
@@ -171,6 +175,7 @@ export default function CartProvider({
         cart,
         addToCart,
         removeFromCart,
+        removeCart,
         updateQuantity,
         getCartTotal,
         products,

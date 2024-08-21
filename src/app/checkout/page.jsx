@@ -21,8 +21,10 @@ const countries = [
 ];
 
 export default function CheckoutPage() {
-  const { cart, getCartTotal } = useCart();
+  const { cart, getCartTotal, removeCart } =
+    useCart();
   const router = useRouter();
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -33,16 +35,6 @@ export default function CheckoutPage() {
   });
   const [paymentMethod, setPaymentMethod] =
     useState("creditCard");
-
-  const [isCheckOut, setIsCheckOut] =
-    useState(false);
-
-  useEffect(() => {
-    if (cart.length === 0) {
-      setIsCheckOut(false);
-      router.push("/");
-    }
-  }, [cart, router]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -56,7 +48,8 @@ export default function CheckoutPage() {
     e.preventDefault();
     // 在這裡處理結帳邏輯：發送訂單到後端
 
-    fetch("/api/orders", {
+    fetch("/api/orders-server", {
+      // "/api/orders"是不上傳MongoDB的原始路徑
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -69,6 +62,10 @@ export default function CheckoutPage() {
     })
       .then((response) => response.json())
       .then((data) => {
+        removeCart();
+        router.push(
+          `/thank-you?orderId=${data.id}`
+        );
         console.log(data);
       })
       .catch((error) => {
@@ -85,10 +82,6 @@ export default function CheckoutPage() {
     // });
     // 可以在這裡添加表單驗證邏輯？
   };
-
-  if (cart.length === 0 && isCheckOut) {
-    return null;
-  }
 
   // 如果購物車為空，返回 null（不渲染任何內容）
   if (cart.length === 0) {

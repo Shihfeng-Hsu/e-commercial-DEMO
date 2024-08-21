@@ -38,13 +38,13 @@ export default async function ProductPage({
           <div className="flex mb-4">
             <div className="mr-4">
               <span className="font-bold text-gray-700">
-                Price:
+                價格:
               </span>
               <span className="text-gray-600">
                 ${product.price}
               </span>
             </div>
-            <div>
+            {/* <div>
               <span className="font-bold text-gray-700">
                 Availability:
               </span>
@@ -53,7 +53,7 @@ export default async function ProductPage({
                   ? "In Stock"
                   : "Out of Stock"}
               </span>
-            </div>
+            </div> */}
           </div>
           <AddToCartButton product={product} />
         </div>

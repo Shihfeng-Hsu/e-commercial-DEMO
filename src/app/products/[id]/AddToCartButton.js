@@ -26,7 +26,7 @@ export default function AddToCartButton({
     <div>
       <div className="mb-4">
         <span className="font-bold text-gray-700">
-          Select Size:
+          選擇 Size:
         </span>
         <div className="flex items-center mt-2">
           {["S", "M", "L", "XL"].map((size) => (
@@ -50,7 +50,7 @@ export default function AddToCartButton({
         onClick={handleAddToCart}
         className="bg-blue-500 text-white py-2 px-4 rounded-full font-bold hover:bg-blue-600"
       >
-        Add to Cart
+        加入購物車
       </button>
     </div>
   );

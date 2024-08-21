@@ -49,7 +49,7 @@ const ProductCard = ({ product }) => {
           className="w-full"
           product={product}
         >
-          Add to Cart
+          加入購物車
         </CardButton>
       </CardFooter>
     </Card>

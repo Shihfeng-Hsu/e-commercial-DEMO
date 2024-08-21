@@ -1,6 +1,7 @@
 import React from "react";
 import Carousel from "@/components/Carousel";
 import ProductCard from "@/components/ProductCard";
+import CartButton from "@/components/CartButton";
 
 const featuredProducts = [
   {
@@ -101,6 +102,7 @@ const carouselImages = [
 export default function Home() {
   return (
     <div className="space-y-8">
+      <CartButton />
       <section>
         <Carousel images={carouselImages} />
       </section>
